@@ -1,13 +1,14 @@
 import React from 'react'
-import Sidebar from './Components/Sidebar'
-import Chat from './Components/chat'
+import { Sidebar } from '../Components/Sidebar'
+import { Chat } from '../Components/chat'
 
-const Home = () => {
+
+export const Home = () => {
   return (
     <div className='home'>
         <div className='container'>
             <Sidebar></Sidebar>
-            <Chat></Chat>
+            <Chat>dfb</Chat>
 
         </div>
         
@@ -15,4 +16,3 @@ const Home = () => {
   )
 }
 
-export default Home

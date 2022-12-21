@@ -3,7 +3,7 @@ import "./App.css";
 import "./style.scss";
 import { Register } from "./pages/Register";
 import { Login } from "./pages/Login";
-import { Home } from "../components/Home";
+import { Home } from "./pages/Home";
 
 
 function App() {
@@ -11,7 +11,7 @@ function App() {
     <div className="App">
       {/* <Register/>  */}
       {/* <Login /> */}
-      <Home />
+      <Home/>
     </div>
   );
 }

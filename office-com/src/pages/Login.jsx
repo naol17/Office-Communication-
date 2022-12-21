@@ -1,24 +1,20 @@
 import React from 'react'
 
-export const Register = () => {
+export const Login = () => {
   return (
     <div className='formcontainer'>
         <div className='firmwrapper'>
           <span className='logo'>Office Communication</span>
-          <span className='title'>Register</span>
+          <span className='title'>Login</span>
           <form>
-            <input type='text' placeholder="diplay name"/>
             <input type='email' placeholder="email"/>
             <input type='password' placeholder="password"/>
             <input style={{display:"none"}} type='file' id='file'/>
-            <lable htmlFor='file'>
-              <img src='' alt='I'/> 
-              <span>add avatr</span>
-              </lable>         
-            <button>Sign up</button>
+                    
+            <button>Log In</button>
                       
           </form>
-            <p>Do You have an account? Log in</p>
+            <p>Don't You have an account? Register</p>
             
         </div>
     </div>

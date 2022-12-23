@@ -142,6 +142,7 @@
         padding: 10px;
         gap: 10px;
         cursor: pointer;
+
         &:hover {
           background-color: #2f2d52;
         }
@@ -159,7 +160,8 @@
           cursor: pointer;
         }
 
-        .userchinfo {
+        .userchinfo {       
+
           span {
             font-size: 18px;
             font-weight: 500;
@@ -197,28 +199,52 @@
         background-color: #ddddf7;
         padding-right: 85%;
         height: calc(100% - 100px);
+        overflow: scroll;
 
         .message{
           margin-left: 10px;
           display: flex;
           gap: 20px;
+          margin-bottom: 20px;
           .mesageinfo{
+            display: flex;
+            flex-direction: column;
+              color: gray;
+              font-weight: 300;
+              // width: 90%;
+
 
             img{
-              width: 40px;
-              height: 40px;
+              width: 50px;
+              height: 50px;
               border-radius: 50%;
               object-fit: cover;
+            }
+            span{
+              // display: flex;
+              font-size: 12px;
             }
 
 
           }
           .messagecontent{
+           max-width: 80%;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            p{
+              background-color: #fff;
+              padding: 10px 20px;
+              border-radius: 0px 10px 10px 10px;
+              width: 100%;
+
+            }
             img{
-              width: 50%;
+              width: 50%  ;
             }
 
           }
+          
         }
       }
       .input{

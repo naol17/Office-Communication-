@@ -1,4 +1,6 @@
 import React from 'react'
+import  { BsFillImageFill } from "react-icons/bs";
+
 
 export const Register = () => {
   return (
@@ -7,13 +9,13 @@ export const Register = () => {
           <span className='logo'>Office Communication</span>
           <span className='title'>Register</span>
           <form>
-            <input type='text' placeholder="diplay name"/>
+            <input type='text' placeholder="Name"/>
             <input type='email' placeholder="email"/>
             <input type='password' placeholder="password"/>
             <input style={{display:"none"}} type='file' id='file'/>
             <lable htmlFor='file'>
-              <img src='' alt='I'/> 
-              <span>add avatr</span>
+              <img src='' alt=''/> 
+              <span> <BsFillImageFill />  add avatr</span>
               </lable>         
             <button>Sign up</button>
                       

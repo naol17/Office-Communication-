@@ -7,7 +7,7 @@ export const Chat = () => {
       <div className="chatinfo">
         <span>Naol</span>
         <div className="chaticons">
-        <HiUserAdd style={{color: 'red', fontSize: '20px'}} /> <FiMoreVertical />
+        <HiUserAdd style={{color: 'red', fontSize: '20px'}} /> <FiMoreVertical  style={{color: 'red', fontSize: '20px'}}/>
         </div>
       </div>
     </div>

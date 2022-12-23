@@ -1,9 +1,13 @@
 import React from 'react'
 
-const Input = () => {
+export const Input = () => {
   return (
-    <div>Input</div>
+    <div className='input'>
+      <input type="text" placeholder='Tye message...' />
+      <div className="send">
+        
+      </div>
+    </div>
   )
 }
 
-export default Input

@@ -193,6 +193,15 @@
           cursor: pointer;
         }
       }
+      .messages{
+        background-color: #ddddf7;
+        padding-right: 85%;
+        height: calc(100% - 100px);
+      }
+      .input{
+        height: 50px;
+        background-color: #fff; 
+      }
     }
   }
 }

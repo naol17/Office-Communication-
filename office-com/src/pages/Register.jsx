@@ -62,6 +62,7 @@ export const Register = () => {
               email,
               photoURL:downloadURL,
             });
+            await setDoc(doc(db,"userChats", ref.user.uid))
           });
         }
       );

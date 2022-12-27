@@ -5,13 +5,13 @@ import { getStorage, ref } from "firebase/storage";
 import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCQ84UnVmS13hP4D5mFEvrwHDPBnWBXQd0",
-  authDomain: "office-communication-a0c7f.firebaseapp.com",
-  projectId: "office-communication-a0c7f",
-  storageBucket: "office-communication-a0c7f.appspot.com",
-  messagingSenderId: "634083081233",
-  appId: "1:634083081233:web:bc4c22daac48caef3205b0",
-  measurementId: "G-C4BLY9TBF9"
+  apiKey: "AIzaSyCUhHz7FlQG9PuJV7HFSHtfh11aIaMYuCY",
+  authDomain: "office-com-6bc7b.firebaseapp.com",
+  projectId: "office-com-6bc7b",
+  storageBucket: "office-com-6bc7b.appspot.com",
+  messagingSenderId: "269487998699",
+  appId: "1:269487998699:web:c28ce478ab7bc6d97ce0ae",
+  measurementId: "G-PZ2LF2ZQEC"
 };
 
 // Initialize Firebase

@@ -5,10 +5,12 @@ import { auth, db, storage } from "../firebase";
 import { useState } from "react";
 import { async } from "@firebase/util";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
-import { doc, setDoc } from "firebase/firestore"; 
+import { doc, setDoc } from "firebase/firestore";
+import {  useNavigate } from "react-router-dom";
 
 export const Register = () => {
   const [error, setError] = useState(false);
+  const navigate = useNavigate()
 
   const handlesubmit = async (e) => {
     e.preventDefault();
@@ -18,19 +20,20 @@ export const Register = () => {
     const file = e.target[3].files[0];
 
     // const auth = getAuth();
-    createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        // Signed in
-        const user = userCredential.user;
+    // createUserWithEmailAndPassword(auth, email, password)
+    //   .then((userCredential) => {
+    //     // Signed in
+    //     const user = userCredential.user;
 
-        console.log(user);
-        // ...
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        // ..
-      });
+    //     console.log(user);
+    //     // ...
+    //   })
+    //   .catch((error) => {
+    //     // const errorCode = error.message
+    //     const errorCode = error.code;
+    //     const errorMessage = error.message;
+    //     // ..
+    //   });
 
     try {
       const res = await createUserWithEmailAndPassword(auth, email, password);
@@ -40,7 +43,6 @@ export const Register = () => {
 
       const uploadTask = uploadBytesResumable(storageRef, file);
 
-     
       uploadTask.on(
         (error) => {
           setError(true);
@@ -56,17 +58,18 @@ export const Register = () => {
               photoURL: downloadURL,
             });
 
-            await setDoc(doc(db, "users", res.user.uid ),{
-              uid:res.user.uid,
+            await setDoc(doc(db, "users", res.user.uid), {
+              uid: res.user.uid,
+              // NamedNodeMap,
               displayName,
               email,
-              photoURL:downloadURL,
+              photoURL: downloadURL,
             });
-            await setDoc(doc(db,"userChats", ref.user.uid))
+            await setDoc(doc(db, "userChats", ref.user.uid),{});
+            navigate("/")
           });
         }
       );
-     
     } catch (error) {
       setError(true);
     }
@@ -84,11 +87,8 @@ export const Register = () => {
           <input style={{ display: "none" }} type="file" id="file" />
           <label htmlFor="file">
             <img src="" alt="" />
-            {/* <BsFillImageFill /> */}
-            <span>
-              {" "}
-               add avatr
-            </span>
+            <BsFillImageFill />
+            <span> add avatr</span>
           </label>
           <button>Sign up</button>
           {error && <span>Something went wrong </span>}

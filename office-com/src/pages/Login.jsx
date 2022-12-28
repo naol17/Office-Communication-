@@ -1,9 +1,10 @@
 import React from "react";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-
+import { Link, useNavigate } from "react-router-dom";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../firebase";
 export const Login = () => {
-  const [error, setError] = useState(false);
+  const [err, setErr] = useState(false);
   const navigate = useNavigate();
 
   const handlesubmit = async (e) => {
@@ -12,19 +13,11 @@ export const Login = () => {
     const password = e.target[1].value;
 
     try {
-      const auth = getAuth();
-      signInWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-          // Signed in
-          const user = userCredential.user;
-          // ...
-        })
-        .catch((error) => {
-          const errorCode = error.code;
-          const errorMessage = error.message;
-        });
-    } catch (error) {
-      setError(true);
+      // const auth = getAuth();
+     await signInWithEmailAndPassword(auth, email, password)
+       navigate("/")
+    } catch (err) {
+      setErr(true);
     }
   };
   return (
@@ -38,9 +31,12 @@ export const Login = () => {
           <input style={{ display: "none" }} type="file" id="file" />
 
           <button>Log In</button>
+          {err && <span>Something went wrong </span>}
+
         </form>
-        <p>Don't You have an account? Register</p>
+        <p>Don't You have an account? <Link to="/register">Register</Link></p>
       </div>
     </div>
   );
 };
+ 

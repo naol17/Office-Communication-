@@ -1,10 +1,36 @@
+import { async } from '@firebase/util';
+import { collection, getDoc, getDocs, query, where } from 'firebase/firestore';
 import React from 'react'
+import { useState } from 'react'
 
 export const Search = () => {
+  const [userName, setuserName] = useState("");
+  const [user, setuser] = useState(null);
+  const [err, setErr] = useState(false);
+
+
+  const handlesearch = async()=>{
+    const q = query(
+      collection(db, "users"),
+      where("displayName", "==", userName)
+    );
+    const querySnapShot = await getDocs(q);
+    querySnapShot.forEach(doc => {
+      
+    });
+
+  }
+
+  const handlekey = (e)=>{
+    e.code === "Error" && handlesearch();
+
+  }
+
+
   return (
     <div className='search'>
       <div className='searchfo'>
-        <input type='text' placeholder='Find user'>
+        <input type='text' placeholder='Find user'onKeyDown={handlekey} onChange={e=>setuserName(e.target.value)}>
 
         </input>
       </div>

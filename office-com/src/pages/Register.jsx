@@ -6,7 +6,7 @@ import { useState } from "react";
 import { async } from "@firebase/util";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { doc, setDoc } from "firebase/firestore";
-import {  useNavigate } from "react-router-dom";
+import {  Link, useNavigate } from "react-router-dom";
 
 export const Register = () => {
   const [error, setError] = useState(false);
@@ -57,13 +57,14 @@ export const Register = () => {
               displayName,
               photoURL: downloadURL,
             });
-
+            
             await setDoc(doc(db, "users", res.user.uid), {
+
               uid: res.user.uid,
-              // NamedNodeMap,
-              displayName,
-               
+              // NamedNodeMap,              
+              displayName,               
               email,
+              password,
               photoURL: downloadURL,
             });
             await setDoc(doc(db, "userChats", ref.user.uid),{});
@@ -94,7 +95,7 @@ export const Register = () => {
           <button>Sign up</button>
           {error && <span>Something went wrong </span>}
         </form>
-        <p>Do You have an account? Log in</p>
+        <p>Do You have an account? <Link to="/login">Log in</Link></p>
       </div>
     </div>
   );

@@ -62,6 +62,7 @@ export const Register = () => {
               uid: res.user.uid,
               // NamedNodeMap,
               displayName,
+               
               email,
               photoURL: downloadURL,
             });

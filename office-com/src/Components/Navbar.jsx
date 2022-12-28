@@ -10,7 +10,7 @@ export const Navbar = () => {
     <div className='navbar'>
 
       <span className='logo'>Office-Comm </span>
-      <div className='user'>
+      <div className='user'>        
         <img src={currentUser.photoURL} alt=''></img>
         <span>{currentUser.displayName}</span>
         <button onClick={()=> signOut(auth)}>LogOut</button>

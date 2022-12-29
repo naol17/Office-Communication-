@@ -1,12 +1,16 @@
-import { async } from "@firebase/util";
-import { collection, getDoc, getDocs, query, where } from "firebase/firestore";
+// import { async } from "@firebase/util";
+import { collection, doc, getDoc,getDocs, query, serverTimestamp, setDoc, updateDoc, where } from "firebase/firestore";
 import React from "react";
+import { useContext } from "react";
 import { useState } from "react";
+import { AuthContext } from "../context/AuthContext";
 import { db } from "../firebase";
+// import Messages from "./Messages";
 export const Search = () => {
   const [userName, setuserName] = useState("");
   const [user, setuser] = useState(null);
   const [err, setErr] = useState(false);
+  const {currentUser} = useContext(AuthContext)
 
   const handlesearch = async () => {
     const q = query(
@@ -27,7 +31,44 @@ export const Search = () => {
     e.code === "Error" && handlesearch();
   };
 
-  const handleSelect = () => {};
+  const handleSelect = async() => {
+    // check if chat is in a firebase
+    const CombinedId = currentUser.uid > user.uid ? currentUser.uid + user.uid : user.uid + currentUser.uid;
+
+    try {
+  const res = await getDoc(doc(db, "chats", CombinedId));
+
+  if (!res.exists()) {
+    await setDoc(doc,(db,"chats", CombinedId),{messages:[]})
+
+    // create user chat 
+   await updateDoc(doc(db,"userChats",currentUser.uid),{
+    [CombinedId+".userInfo"]:{
+      uid:user.uid,
+      displayName: user.displayName,
+      photo: user.photoURL,
+    },
+    [CombinedId+ ".date"]:serverTimestamp()
+   });
+   await updateDoc(doc(db,"userChats",user.uid),{
+    [CombinedId+".userInfo"]:{
+      uid: currentUser.uid,
+      displayName:  currentUser.displayName,
+      photo:  currentUser.photoURL,
+    },
+    [CombinedId+ ".date"]:serverTimestamp()
+   }) 
+    
+  }
+
+  
+} catch (error) {
+  
+}
+  };
+
+  setuser(null);
+  setuserName("")
 
   return (
     <div className="search">
@@ -37,6 +78,8 @@ export const Search = () => {
           placeholder="Find user"
           onKeyDown={handlekey}
           onChange={(e) => setuserName(e.target.value)}
+          value={userName}
+          
         ></input>
       </div>
       {err && <span>user not found</span>}

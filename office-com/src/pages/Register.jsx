@@ -19,21 +19,7 @@ export const Register = () => {
     const password = e.target[2].value;
     const file = e.target[3].files[0];
 
-    // const auth = getAuth();
-    // createUserWithEmailAndPassword(auth, email, password)
-    //   .then((userCredential) => {
-    //     // Signed in
-    //     const user = userCredential.user;
-
-    //     console.log(user);
-    //     // ...
-    //   })
-    //   .catch((error) => {
-    //     // const errorCode = error.message
-    //     const errorCode = error.code;
-    //     const errorMessage = error.message;
-    //     // ..
-    //   });
+    
 
     try {
       const res = await createUserWithEmailAndPassword(auth, email, password);
@@ -61,13 +47,12 @@ export const Register = () => {
             await setDoc(doc(db, "users", res.user.uid), {
 
               uid: res.user.uid,
-              // NamedNodeMap,              
               displayName,               
               email,
               password,
               photoURL: downloadURL,
             });
-            await setDoc(doc(db, "userChats", ref.user.uid),{});
+            await setDoc(doc(db, "userChats", res.user.uid),{});
             navigate("/")
           });
         }

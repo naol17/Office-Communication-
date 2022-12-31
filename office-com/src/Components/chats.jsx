@@ -4,11 +4,13 @@ import { useContext } from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import { AuthContext } from "../context/AuthContext";
+import { ChatContext } from "../context/ChatContext";
 import { db } from "../firebase";
 
 export const Chats = () => {
   const [Chats, setchats] = useState([]);
   const { currentUser } = useContext(AuthContext);
+  const { dispach } = useContext(ChatContext);
 
   useEffect(() => {
     const getChats = () => {
@@ -20,17 +22,25 @@ export const Chats = () => {
         unsub();
       };
     };
-    currentUser.uid && getChats()
+    currentUser.uid && getChats();
   }, [currentUser.uid]);
+
+  const handleSelect = (u) => {
+    dispach({ type: "CHANGE_USER", payload: u });
+  };
   console.log(Object.entries(Chats));
   return (
     <div className="chats">
-      {Object.entries(Chats)?.map((Chat) => (
-        <div className="userchat" key={Chat[0]}>
-          <img src={Chat[1].userInfo.photoURL} alt="" />
+      {Object.entries(Chats)?.map((chat) => (
+        <div
+          className="userchat"
+          key={chat[0]}
+          onClick={() => handleSelect(chat[1].userInfo)}
+        >
+          <img src={chat[1].userInfo.photoURL} alt="" />
           <div className="userchinfo">
-            <span>{Chat[1].userInfo.displayName}</span>
-            <p>{Chat[1].userInfo.lastMessage?.text}</p>
+            <span>{chat[1].userInfo.displayName}</span>
+            <p>{chat[1].userInfo.lastMessage?.text}</p>
           </div>
         </div>
       ))}

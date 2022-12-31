@@ -65,7 +65,7 @@ export const Register = () => {
   return (
     <div className="formcontainer">
       <div className="firmwrapper">
-        <span className="logo">Office Communication</span>
+        <span className="logo">My Work-Space</span>
         <span className="title">Register</span>
         <form onSubmit={handlesubmit}>
           <input type="text" placeholder="Name" />

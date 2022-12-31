@@ -20,10 +20,11 @@ export const Chats = () => {
         unsub();
       };
     };
+    currentUser.uid && getChats()
   }, [currentUser.uid]);
-  console.log(Chats);
+  console.log(Object.entries(Chats));
   return (
-    <div>
+    <div className="chats">
       {Object.entries(Chats)?.map((Chat) => (
         <div className="userchat" key={Chat[0]}>
           <img src={Chat[1].userInfo.photoURL} alt="" />

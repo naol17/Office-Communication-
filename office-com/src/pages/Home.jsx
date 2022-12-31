@@ -9,7 +9,7 @@ export const Home = () => {
     <div className='home'>
         <div className='container'>
             <Sidebar></Sidebar>
-            <Chat>dfb</Chat>
+            <Chat></Chat>
 
         </div>
         

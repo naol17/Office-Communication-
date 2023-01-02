@@ -9,11 +9,11 @@ export const Navbar = () => {
   return (
     <div className='navbar'>
 
-      <span className='logo'>Office-Comm </span>
+      <span className='logo'>Myspace </span>
       <div className='user'>        
         <img src={currentUser.photoURL} alt=''></img>
         <span>{currentUser.displayName}</span>
-        <button onClick={()=> signOut(auth)}>LogOut</button>
+        <button onClick={()=>signOut(auth)}>LogOut</button>
         
       </div>    
 

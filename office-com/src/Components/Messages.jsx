@@ -8,18 +8,21 @@ import { db } from "../firebase";
 import { Input } from "./Input";
 import { Mesage } from "./Mesage";
 
-export const Messages=()=> {
+export const Messages = () => {
   const [messages, setMessages] = useState([]);
-  const [data] = useContext(ChatContext);
+  const { data } = useContext(ChatContext);
 
   useEffect(() => {
-    const unsub = onSnapshot(doc(db, "chats", data.chatId), (doc) => {
+    const unSub = onSnapshot(doc(db, "chats", data.chatId), (doc) => {
       doc.exists() && setMessages(doc.data().messages);
     });
+
     return () => {
-      unsub();
+      unSub();
     };
   }, [data.chatId]);
+
+  console.log(messages)
 
   return (
     <div className="messages">
@@ -28,6 +31,6 @@ export const Messages=()=> {
       ))}
     </div>
   );
-}
+};
 
 // export default Messages;

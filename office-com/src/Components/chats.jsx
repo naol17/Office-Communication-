@@ -8,30 +8,32 @@ import { ChatContext } from "../context/ChatContext";
 import { db } from "../firebase";
 
 export const Chats = () => {
-  const [Chats, setchats] = useState([]);
+  const [chats, setChats] = useState([]);
+
   const { currentUser } = useContext(AuthContext);
-  const { dispach } = useContext(ChatContext);
+  const { dispatch } = useContext(ChatContext);
 
   useEffect(() => {
     const getChats = () => {
       const unsub = onSnapshot(doc(db, "userChats", currentUser.uid), (doc) => {
-        setchats(doc.data());
+        setChats(doc.data());
       });
 
       return () => {
         unsub();
       };
     };
+
     currentUser.uid && getChats();
   }, [currentUser.uid]);
 
   const handleSelect = (u) => {
-    dispach({ type: "CHANGE_USER", payload: u });
+    dispatch({ type: "CHANGE_USER", payload: u });
   };
-  console.log(Object.entries(Chats));
+
   return (
     <div className="chats">
-      {Object.entries(Chats)?.sort((a,b)=> b[1].date-a[1].date).map((chat) => (
+      {Object.entries(chats)?.sort((a,b)=>b[1].date - a[1].date).map((chat) => (
         <div
           className="userchat"
           key={chat[0]}

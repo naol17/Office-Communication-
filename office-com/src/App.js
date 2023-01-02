@@ -1,4 +1,4 @@
-import logo from "./logo.svg";
+// import logo from "./logo.svg";
 import "./App.css";
 import "./style.scss";
 import { Register } from "./pages/Register";
@@ -10,7 +10,7 @@ import { AuthContext } from "./context/AuthContext";
 
 function App() {
   const { currentUser } = useContext(AuthContext);
-  const protectedRoute = ({ children }) => {
+  const ProtectedRoute = ({ children }) => {
     if (!currentUser) {
       return <Navigate to="/login" />;
     }
@@ -25,10 +25,10 @@ function App() {
           <Route
             index
             element={
-              <protectedRoute>
+              <ProtectedRoute>
                 <Home/>
                 
-              </protectedRoute>
+              </ProtectedRoute>
             }
           />
           <Route path="login" element={<Login />} />

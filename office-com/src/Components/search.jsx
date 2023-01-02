@@ -42,7 +42,6 @@ export const Search = () => {
   };
 
   const handleSelect = async () => {
-    
     // check if chat is in a firebase
     const CombinedId =
       currentUser.uid > user.uid

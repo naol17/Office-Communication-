@@ -9,56 +9,57 @@ import { doc, setDoc } from "firebase/firestore";
 import {  Link, useNavigate } from "react-router-dom";
 
 export const Register = () => {
-  const [error, setError] = useState(false);
+  const [err, setErr] = useState(false);
   const navigate = useNavigate()
 
+  const [loading, setLoading] = useState(false);
+
   const handlesubmit = async (e) => {
+        setLoading(true);
+
     e.preventDefault();
     const displayName = e.target[0].value;
     const email = e.target[1].value;
     const password = e.target[2].value;
     const file = e.target[3].files[0];
-
     
 
     try {
       const res = await createUserWithEmailAndPassword(auth, email, password);
-
       // const storage = getStorage();
-      const storageRef = ref(storage, displayName);
+      const date = new Date().getTime();
+      const storageRef = ref(storage, `${displayName + date}`); 
+      // const uploadTask = uploadBytesResumable(storageRef, file);
 
-      const uploadTask = uploadBytesResumable(storageRef, file);
-
-      uploadTask.on(
-        (error) => {
-          setError(true);
-
-          // Handle unsuccessful uploads
-        },
-        () => {
-          // Handle successful uploads on complete
-          // For instance, get the download URL: https://firebasestorage.googleapis.com/...
-          getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
+      await uploadBytesResumable(storageRef, file).then(() => {
+        getDownloadURL(storageRef).then(async (downloadURL) => {
+          try {
+            //Update profile
             await updateProfile(res.user, {
               displayName,
               photoURL: downloadURL,
             });
-            
+            //create user on firestore
             await setDoc(doc(db, "users", res.user.uid), {
-
               uid: res.user.uid,
-              displayName,               
+              displayName,
               email,
-              password,
               photoURL: downloadURL,
             });
-            await setDoc(doc(db, "userChats", res.user.uid),{});
-            navigate("/")
-          });
-        }
-      );
-    } catch (error) {
-      setError(true);
+
+            //create empty user chats on firestore
+            await setDoc(doc(db, "userChats", res.user.uid), {});
+            navigate("/");
+          } catch (err) {
+            console.log(err);
+            setErr(true);
+            setLoading(false);
+          }
+        });
+      });
+    } catch (err) {
+      setErr(true);
+      setLoading(false);
     }
   };
 
@@ -78,7 +79,8 @@ export const Register = () => {
             <span> add avatr</span>
           </label>
           <button>Sign up</button>
-          {error && <span>Something went wrong </span>}
+          {loading && "Uploading please wait..."}
+          {err && <span>Something went wrong </span>}
         </form>
         <p>Do You have an account? <Link to="/login">Log in</Link></p>
       </div>

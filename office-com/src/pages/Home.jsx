@@ -1,7 +1,6 @@
 import React from 'react'
 import {Sidebar} from '../Components/Sidebar'
 import {Chat} from '../Components/chat'
-import { Chats } from '../Components/chats'
 
 export const Home = () => {
   return (
@@ -9,7 +8,6 @@ export const Home = () => {
       <div className="container">
         <Sidebar/>
         <Chat/>
-        <Chats/>
       </div>
     </div>
   )

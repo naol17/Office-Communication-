@@ -2,7 +2,7 @@ import { doc, onSnapshot } from "firebase/firestore";
 import React, { useContext, useEffect, useState } from "react";
 import { ChatContext } from "../context/ChatContext";
 import { db } from "../firebase";
-import {Mesage} from "./Mesage"
+import { Mesage } from "./Mesage";
 export const Messages = () => {
   const [messages, setMessages] = useState([]);
   const { data } = useContext(ChatContext);
@@ -17,7 +17,7 @@ export const Messages = () => {
     };
   }, [data.chatId]);
 
-  console.log(messages)
+  console.log(messages);
 
   return (
     <div className="messages">
@@ -27,10 +27,6 @@ export const Messages = () => {
     </div>
   );
 };
-
-
-
-
 
 // import { doc, onSnapshot } from "firebase/firestore";
 // import React from "react";

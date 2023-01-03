@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
-import {HiUserAdd} from 'react-icons/hi'
-import{FiMoreVertical} from 'react-icons/fi'
+import { HiUserAdd } from "react-icons/hi";
+import { FiMoreVertical } from "react-icons/fi";
 
 import { ChatContext } from "../context/ChatContext";
 import { Messages } from "./Messages";
@@ -14,24 +14,15 @@ export const Chat = () => {
       <div className="chatinfo">
         <span>{data.user?.displayName}</span>
         <div className="chaticons">
-       <HiUserAdd style={{color: 'red', fontSize: '20px'}} /> <FiMoreVertical  style={{color: 'red', fontSize: '20px'}}/>
-
+          <HiUserAdd style={{ color: "red", fontSize: "20px" }} />{" "}
+          <FiMoreVertical style={{ color: "red", fontSize: "20px" }} />
         </div>
       </div>
-     <Messages/>
-     <Input/>
+      <Messages />
+      <Input />
     </div>
   );
 };
-
-
-
-
-
-
-
-
-
 
 // import React from 'react'
 // import {HiUserAdd} from 'react-icons/hi'
@@ -57,4 +48,3 @@ export const Chat = () => {
 //     </div>
 //   )
 // }
-

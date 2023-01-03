@@ -3,32 +3,30 @@ import { BsFillImageFill } from "react-icons/bs";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth, db, storage } from "../firebase";
 import { useState } from "react";
-import { async } from "@firebase/util";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { doc, setDoc } from "firebase/firestore";
-import {  Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export const Register = () => {
   const [err, setErr] = useState(false);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const [loading, setLoading] = useState(false);
 
   const handlesubmit = async (e) => {
-        setLoading(true);
+    setLoading(true);
 
     e.preventDefault();
     const displayName = e.target[0].value;
     const email = e.target[1].value;
     const password = e.target[2].value;
     const file = e.target[3].files[0];
-    
 
     try {
       const res = await createUserWithEmailAndPassword(auth, email, password);
       // const storage = getStorage();
       const date = new Date().getTime();
-      const storageRef = ref(storage, `${displayName + date}`); 
+      const storageRef = ref(storage, `${displayName + date}`);
       // const uploadTask = uploadBytesResumable(storageRef, file);
 
       await uploadBytesResumable(storageRef, file).then(() => {
@@ -82,7 +80,9 @@ export const Register = () => {
           {loading && "Uploading please wait..."}
           {err && <span>Something went wrong </span>}
         </form>
-        <p>Do You have an account? <Link to="/login">Log in</Link></p>
+        <p>
+          Do You have an account? <Link to="/login">Log in</Link>
+        </p>
       </div>
     </div>
   );

@@ -224,6 +224,10 @@
           gap: 10px;
           padding-right: 10px;
           cursor: pointer;
+          img {
+            height: 24px;
+            cursor: pointer;
+          }
         }
       }
       .messages{
@@ -244,6 +248,12 @@
               font-weight: 300;
               // width: 90%;
 
+              .messageInfo {
+                display: flex;
+                flex-direction: column;
+                color: gray;
+                font-weight: 300;
+
 
             img{
               width: 50px;
@@ -251,6 +261,7 @@
               border-radius: 50%;
               object-fit: cover;
             }
+          }
             span{
               // display: flex;
               font-size: 12px;

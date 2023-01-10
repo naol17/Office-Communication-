@@ -2,6 +2,7 @@ import React from "react";
 import { Sidebar } from "../Components/Sidebar";
 import { Chat } from "../Components/chat";
 import { Draggable_Card } from "../Components/draggable/draggable_card";
+import { Dheader } from "../Components/draggable/Dheader";
 
 export const Home = () => {
   return (
@@ -10,6 +11,7 @@ export const Home = () => {
         {/* <Sidebar /> */}
         {/* <Chat /> */}
         <Draggable_Card />
+        <Dheader />
       </div>
     </div>
   );

@@ -1,7 +1,7 @@
 import React from "react";
 import { Sidebar } from "../Components/Sidebar";
 import { Chat } from "../Components/chat";
-import { Draggable_card } from "../Components/draggable/draggable_card";
+import { Draggable_Card } from "../Components/draggable/draggable_card";
 
 export const Home = () => {
   return (
@@ -9,7 +9,7 @@ export const Home = () => {
       <div className="container">
         {/* <Sidebar /> */}
         {/* <Chat /> */}
-        <Draggable_card />
+        <Draggable_Card />
       </div>
     </div>
   );
